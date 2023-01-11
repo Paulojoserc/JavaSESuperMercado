@@ -1,5 +1,7 @@
 package entidade;
 
+import erro.Personalizado;
+
 public abstract class Funcionario {
 private String Nome =null;
 private Double salario =null;
@@ -56,7 +58,7 @@ public abstract double calcularSalario();
 public abstract String formatado(); 
 	
 
-public abstract void verificacao(); 
+public abstract void verificacao() throws Personalizado; 
 	
 
 }

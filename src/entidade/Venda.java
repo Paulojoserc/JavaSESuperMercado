@@ -18,4 +18,6 @@ private Date agora = new Date();
 private Integer number =null;
 private Integer parcelas =null;
 private Double desconto =null;
+
+
 }

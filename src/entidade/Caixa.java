@@ -1,5 +1,7 @@
 package entidade;
 
+import erro.Personalizado;
+
 public class Caixa extends Funcionario {
 private Integer caixa=null;
 
@@ -22,7 +24,7 @@ public void setCaixa(Integer caixa) {
 
 @Override
 public double calcularSalario() {
-	return getSalario()+getDesconto();
+	return getSalario()-getDesconto();
 }
 
 @Override
@@ -31,8 +33,10 @@ public String formatado() {
 }
 
 @Override
-public void verificacao() {
-	// TODO Auto-generated method stub
+public void verificacao() throws Personalizado {
+	if(getNome()==null || getSalario()==null || getDesconto()==null || caixa==null ) {
+		throw new Personalizado("Não pode ter valores nulos");
+	}
 	
 }
 
