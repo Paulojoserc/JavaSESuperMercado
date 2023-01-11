@@ -9,7 +9,6 @@ public Proprietario() {
 }
 
 public Proprietario(String login, String senha) {
-	super();
 	this.login = login;
 	this.senha = senha;
 }
