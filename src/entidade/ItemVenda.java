@@ -1,16 +1,16 @@
  package entidade;
 
-public class ItensVenda {
+public class ItemVenda {
 private Integer numero=null;
 private String nomeProduto=null;
 private Double valorUnitario =null;
 private Integer quantidade =null;
 
-public ItensVenda() {
+public ItemVenda() {
 	
 }
 
-public ItensVenda(Integer numero, String nomeProduto, Double valorUnitario, Integer quantidade) {
+public ItemVenda(Integer numero, String nomeProduto, Double valorUnitario, Integer quantidade) {
 	this.numero = numero;
 	this.nomeProduto = nomeProduto;
 	this.valorUnitario = valorUnitario;
@@ -48,7 +48,7 @@ public Integer getQuantidade() {
 public void setQuantidade(Integer quantidade) {
 	this.quantidade = quantidade;
 }
-public double SubTotal() {
+public double subTotal() {
 	return quantidade+valorUnitario;
 }
 
