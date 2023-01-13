@@ -10,8 +10,7 @@ public ItemVenda() {
 	
 }
 
-public ItemVenda(Integer numero, String nomeProduto, Double valorUnitario, Integer quantidade) {
-	this.numero = numero;
+public ItemVenda( String nomeProduto, Double valorUnitario, Integer quantidade) {
 	this.nomeProduto = nomeProduto;
 	this.valorUnitario = valorUnitario;
 	this.quantidade = quantidade;
@@ -49,12 +48,12 @@ public void setQuantidade(Integer quantidade) {
 	this.quantidade = quantidade;
 }
 public double subTotal() {
-	return quantidade+valorUnitario;
+	return quantidade*valorUnitario;
 }
 
 @Override
 public String toString() {
-	return " Codigo:" + numero + " Descrição: " + nomeProduto + " R$" + valorUnitario +" x "+ " QuantidadeItens: " + quantidade+ "= R$: "+SubTotal();
+	return " Codigo:" + numero + " Descrição: " + nomeProduto + " R$" + valorUnitario +" x "+ " QuantidadeItens: " + quantidade+ "= R$: "+subTotal();
 }
 
 }

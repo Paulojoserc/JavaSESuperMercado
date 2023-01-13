@@ -110,17 +110,78 @@ public class Venda {
 			datas.add(dataFOrmatada);
 		}
 	}
-	
+
 	public void adicionarItem(ItemVenda itens) {
 		item.add(itens);
 	}
-	
+
 	public void removerItem(ItemVenda itens) {
 		item.remove(itens);
 	}
-	public void parcelamento() throws Personalizado {
-		if(parcelas>3) {
-			throw new Personalizado("Desculpe parcelamento maximo é 3x");
+
+	public double descontos() {
+		if (cliente != null && total() >= 130) {
+			return total() - 20;
+		} else {
+			return total();
 		}
 	}
+
+	public double pagamento() {
+		if (getTipoPagamento() == TipoPagamneto.CARTAO) {
+			if (parcelas < 2) {
+				return total();
+			} else {
+				return total() / parcelas;
+			}
+		} else {
+			return total();
+		}
+	}
+
+	public void parcelamento() throws Personalizado {
+		if (parcelas > 3) {
+			throw new Personalizado("Desculpe parcelamento maximo é 3x");
+		}if(parcelas<1) {
+			throw new Personalizado("Quantidade de parcelas inválidas");
+		}
+	}
+	public String recibo() {
+		StringBuilder bd = new StringBuilder();
+		setStatus(StatusVenda.INICIANDO);
+		setStatus(StatusVenda.PROCESSANDO);
+		bd.append("==================\n");
+		bd.append("DADOS DA VENDA : \n");
+		bd.append("==================\n");
+		if(cliente!=null) {
+			bd.append("Cliente : "+cliente+"\n");
+		}else {
+			bd.append("Cliente : não cadastrado \n");
+		}
+		bd.append("Número do pedido do pedido : "+numero+"\n");
+		bd.append("Data da Compra : "+sdf.format(agora)+"\n" );
+		setStatus(StatusVenda.IMPRIMINDO);
+		bd.append("Status : "+getStatus()+"\n");
+		bd.append("Forma de Pagamento : "+getTipoPagamento());
+		bd.append("ITENS DA VENDA : ");
+		int contador=1;
+		for (ItemVenda list : item) {
+			list.setNumero(contador);
+			bd.append(list+"\n");
+			contador++;
+		}
+		if (getTipoPagamento()==TipoPagamneto.CARTAO) {
+			for (int i=0; i<datas.size();i++) {
+				bd.append((i)+"parcela : "+datas.get(i)+"valor : R$"+String.format("%.2f", pagamento()));
+			}
+			bd.append("Valor Total : "+pagamento()+"\n");
+		}else {
+			bd.append("Valor Total : "+pagamento()+"\n");
+		}
+		bd.append("Situação : "+getPago()+"\n");
+		setStatus(StatusVenda.FINALIZANDO);
+		
+		return bd.toString();
+	}
 }
+
